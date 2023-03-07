@@ -2,7 +2,6 @@
 import { RouterLink, useRoute } from "vue-router";
 import { useModal } from "../composables/useModal";
 import { storeUser } from "../stores/users";
-import SignUp from "./SignUp.vue";
 
 const route = useRoute();
 const modal = useModal();
@@ -24,13 +23,20 @@ const userStore = storeUser();
       </div>
 
       <div v-else class="buttons">
-        <button class="button" @click="modal.showModal()">Sign Up</button>
-        <button class="button is-dark">Sign In</button>
+        <button class="button" @click="modal.showModal(modal.stateTYPE.SIGNUP)">
+          Sign Up
+        </button>
+        <button
+          class="button is-dark"
+          @click="modal.showModal(modal.stateTYPE.SIGNIN)"
+        >
+          Sign In
+        </button>
       </div>
     </div>
   </div>
 
   <Teleport to="#modal">
-    <SignUp />
+    <component :is="modal.component.value" />
   </Teleport>
 </template>

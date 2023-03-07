@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
 import FormInput from "../components/FormInput.vue";
+import { computed, ref } from "vue";
 import { validate, required, length } from "../utils/validations";
 import { NewUser, IMap } from "../utils/constants";
 import { storeUser } from "../stores/users";
@@ -45,14 +45,14 @@ async function handleSubmit() {
     console.log("ERROR", e);
   }
 
-  modal.hideModal(modal.stateTYPE.SIGNUP);
+  modal.hideModal(modal.stateTYPE.SIGNIN);
 }
 </script>
 
 <template>
   <div class="form">
     <h1 class="title">
-      {{ modal.stateTYPE.SIGNUP }}
+      {{ modal.stateTYPE.SIGNIN }}
     </h1>
     <form @submit.prevent="handleSubmit">
       <FormInput
