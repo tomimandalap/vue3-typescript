@@ -2,8 +2,15 @@
 import TimelineItem from "./TimelineItem.vue";
 import { usePosts } from "../stores/posts";
 import { periods } from "../utils/constants";
+// import { onMounted } from "vue";
 
 const postStore = usePosts();
+await postStore.fetchPosts();
+// const getPosts = async () => {
+// };
+// onMounted(() => {
+//   getPosts();
+// });
 </script>
 
 <template>

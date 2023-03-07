@@ -4,10 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "npx ts-node src/server/index.ts",
     "dev": "vite --port 3000 --host",
     "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "server": "npx ts-node src/server/index.ts"
   },
   "dependencies": {
     "@types/cors": "2.8",
