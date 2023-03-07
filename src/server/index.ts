@@ -85,6 +85,18 @@ app.get("/logout", (req, res) => {
   res.status(200).end();
 });
 
+app.post<{}, {}, NewUser>("/sign-in", (req, res) => {
+  const { username, password } = req.body;
+  const targetuser = allUsers.find((user) => user.username === username);
+
+  if (!targetuser || targetuser.password !== password) res.status(401).end();
+  else {
+    const { id, username } = targetuser;
+    authenticate({ id, username }, req, res);
+    res.status(200).end();
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
