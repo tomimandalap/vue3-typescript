@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterLink, useRoute } from "vue-router";
 import { useModal } from "../composables/useModal";
+import SignUp from "./SignUp.vue";
 
 const route = useRoute();
 const modal = useModal();
@@ -20,5 +21,7 @@ const modal = useModal();
     </div>
   </div>
 
-  <Teleport to="#modal"> </Teleport>
+  <Teleport to="#modal">
+    <SignUp />
+  </Teleport>
 </template>

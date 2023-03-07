@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { emit } from "process";
+import { stat } from "fs";
+import { Status } from "../utils/validations";
 
 interface Iinput {
   name: string;
   type: string;
   placeholder: string;
   modelValue: string;
+  status: Status;
 }
 
 defineProps<Iinput>();
@@ -13,7 +15,7 @@ const emits = defineEmits<{
   (event: "update:modelValue", value: string): void;
 }>();
 
-function handleInput($event: any) {
+function handleInput($event: Event) {
   const input = $event.target as HTMLInputElement;
   emits("update:modelValue", input.value);
 }
@@ -31,5 +33,9 @@ function handleInput($event: any) {
         class="input"
       />
     </div>
+
+    <p class="is-danger help" v-if="!status.valid">
+      {{ status.message }}
+    </p>
   </div>
 </template>
