@@ -30,9 +30,6 @@ export function useModal() {
       show.value = true;
       selectModal(type);
     },
-    hideModal: (type: stateTYPE.SIGNUP | stateTYPE.SIGNIN) => {
-      show.value = false;
-      selectModal(type);
-    },
+    hideModal: () => (show.value = false),
   };
 }

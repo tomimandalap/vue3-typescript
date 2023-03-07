@@ -25,6 +25,17 @@ export const storeUser = defineStore("users", {
 
       return this.authenticate();
     },
+    login(newUser: NewUser) {
+      const body = JSON.stringify(newUser);
+
+      return window.fetch("/api/sign-in", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body,
+      });
+    },
     async authenticate() {
       try {
         const res = await window.fetch("/api/user", {
@@ -43,7 +54,6 @@ export const storeUser = defineStore("users", {
         this.userName = undefined;
       }
     },
-
     async logout() {
       await window.fetch("/api/logout", {
         method: "GET",
