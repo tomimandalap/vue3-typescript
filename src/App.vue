@@ -1,15 +1,22 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, onMounted } from "vue";
 import { RouterView } from "vue-router";
 import { useModal } from "./composables/useModal";
+import { storeUser } from "./stores/users";
 import Navbar from "./components/Navbar.vue";
 
 const modal = useModal();
+const userStore = storeUser();
+
 const modalStyle = computed(() => {
   return {
     display: modal.show.value ? "block" : "none",
     color: "white",
   };
+});
+
+onMounted(() => {
+  userStore.authenticate();
 });
 </script>
 

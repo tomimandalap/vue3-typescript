@@ -68,8 +68,13 @@ app.post<{}, {}, NewUser>("/users", (req, res) => {
 app.get("/user", (req, res) => {
   try {
     const token = req.cookies[COOKIE];
-    const result = jsonwebtoken.verify(token, SECRET);
-    res.status(200).send(result);
+    const result = jsonwebtoken.verify(token, SECRET) as {
+      id: string;
+      username: string;
+    };
+
+    const { id, username } = result;
+    res.status(200).send({ id, username });
   } catch (e) {
     res.status(404).end();
   }

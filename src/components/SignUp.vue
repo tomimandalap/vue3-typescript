@@ -41,7 +41,10 @@ async function handleSubmit() {
 
   try {
     await userStore.createUser(newUser);
-  } catch (e) {}
+  } catch (e) {
+    console.log("ERROR", e);
+  }
+
   modal.hideModal();
 }
 </script>
