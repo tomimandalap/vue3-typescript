@@ -20,7 +20,7 @@ export const router = createRouter({
         },
         {
           path: "posts/new",
-          name: "Posts",
+          name: "Create Post",
           component: NewPost,
           meta: { auth: true },
         },
@@ -58,4 +58,8 @@ router.beforeEach((to, from, next) => {
   } else {
     next();
   }
+});
+
+router.afterEach((to) => {
+  document.title = `🚀 ${to.name} | @tomimandalap`;
 });
