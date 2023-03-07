@@ -100,6 +100,9 @@ onMounted(() => {
 
   <div class="columns">
     <div class="column">
+      <button class="button is-danger is-pulled-left" @click="router.go(-1)">
+        Back
+      </button>
       <button class="button is-primary is-pulled-right" @click="handleSave">
         Save Post
       </button>
