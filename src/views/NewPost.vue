@@ -7,6 +7,7 @@ const post: TimeLinePost = {
   id: "-1",
   title: "Title",
   created: DateTime.now(),
+  markdown: "## title",
 };
 </script>
 
