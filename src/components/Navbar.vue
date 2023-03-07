@@ -18,8 +18,9 @@ const userStore = storeUser();
           class="button is-success"
           >New Post</RouterLink
         >
-
-        <button class="button is-danger">Log Out</button>
+        <button class="button is-danger" @click="userStore.logout()">
+          Log Out
+        </button>
       </div>
 
       <div v-else class="buttons">

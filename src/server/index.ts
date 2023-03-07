@@ -1,9 +1,9 @@
 import express, { Request, Response } from "express";
-import { loadEnv } from "vite";
 import cors from "cors";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import jsonwebtoken from "jsonwebtoken";
+import { loadEnv } from "vite";
 import { today, thisWeek, thisMonth, Post } from "../data/posts";
 import { NewUser, User } from "../utils/constants";
 
@@ -38,7 +38,7 @@ function authenticate(data: object, req: Request, res: Response) {
   res.cookie(COOKIE, token, { httpOnly: true });
 }
 
-// servie router
+// service router
 app.get("/post", (req, res) => {
   res.status(200).send(allPosts);
 });
@@ -53,7 +53,7 @@ app.post<{}, {}, Post>("/post", (req, res) => {
   res.status(201).send(post);
 });
 
-app.post<{}, {}, NewUser>("/users", (req, res) => {
+app.post<{}, {}, NewUser>("/sign-up", (req, res) => {
   const user: User = {
     ...req.body,
     id: `${(Math.random() * 100).toFixed()}${Date.now()}`,
@@ -78,6 +78,11 @@ app.get("/user", (req, res) => {
   } catch (e) {
     res.status(404).end();
   }
+});
+
+app.get("/logout", (req, res) => {
+  res.clearCookie(COOKIE);
+  res.status(200).end();
 });
 
 app.listen(PORT, () => {

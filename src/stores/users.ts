@@ -15,7 +15,7 @@ export const storeUser = defineStore("users", {
     async createUser(newUser: NewUser) {
       const body = JSON.stringify(newUser);
 
-      await window.fetch("/api/users", {
+      await window.fetch("/api/sign-up", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -26,17 +26,33 @@ export const storeUser = defineStore("users", {
       return this.authenticate();
     },
     async authenticate() {
-      const res = await window.fetch("/api/user", {
+      try {
+        const res = await window.fetch("/api/user", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        const result = await res.json();
+
+        this.userId = result.id;
+        this.userName = result.username;
+      } catch (e) {
+        this.userId = undefined;
+        this.userName = undefined;
+      }
+    },
+
+    async logout() {
+      await window.fetch("/api/logout", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
       });
 
-      const result = await res.json();
-
-      this.userId = result.id;
-      this.userName = result.username;
+      return this.authenticate();
     },
   },
 });
