@@ -18,7 +18,8 @@
     "luxon": "^3.2.1",
     "pinia": "^2.0.14",
     "ts-node": "^10.9.1",
-    "vue": "^3.2.45"
+    "vue": "^3.2.45",
+    "vue-router": "^4.0.15"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.0.0",
