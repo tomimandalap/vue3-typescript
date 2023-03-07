@@ -8,6 +8,7 @@ const post: TimeLinePost = {
   title: "Title",
   created: DateTime.now(),
   markdown: "## title",
+  html: "<h2>Title</h2>",
 };
 </script>
 
