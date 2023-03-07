@@ -15,7 +15,7 @@ const title = ref(props.post.title);
 const content = ref(props.post.markdown);
 const html = ref("");
 const contentEditable = ref<HTMLDivElement>();
-const storePosts = storePosts();
+const postStore = storePosts();
 const router = useRouter();
 
 const handleInput = () => {
@@ -34,7 +34,7 @@ const handleSave = async () => {
     html: html.value,
   };
 
-  await storePosts.createPost(newPost);
+  await postStore.createPost(newPost);
   router.push("/");
 };
 
@@ -100,10 +100,10 @@ onMounted(() => {
 
   <div class="columns">
     <div class="column">
-      <button class="button is-danger is-pulled-left" @click="router.go(-1)">
+      <button class="button is-light is-pulled-left" @click="router.go(-1)">
         Back
       </button>
-      <button class="button is-primary is-pulled-right" @click="handleSave">
+      <button class="button is-success is-pulled-right" @click="handleSave">
         Save Post
       </button>
     </div>
