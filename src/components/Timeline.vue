@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import TimelineItem from "./TimelineItem.vue";
-import { usePosts } from "../stores/posts";
+import { storePosts } from "../stores/posts";
 import { periods } from "../utils/constants";
 // import { onMounted } from "vue";
 
-const postStore = usePosts();
+const postStore = storePosts();
 await postStore.fetchPosts();
 // const getPosts = async () => {
 // };

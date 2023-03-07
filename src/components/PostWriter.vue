@@ -4,7 +4,7 @@ import { TimeLinePost } from "../data/posts";
 import { marked } from "marked";
 import highlightjs from "highlight.js";
 import { debounce } from "lodash";
-import { usePosts } from "../stores/posts";
+import { storePosts } from "../stores/posts";
 import { useRouter } from "vue-router";
 
 const props = defineProps<{
@@ -15,7 +15,7 @@ const title = ref(props.post.title);
 const content = ref(props.post.markdown);
 const html = ref("");
 const contentEditable = ref<HTMLDivElement>();
-const storePosts = usePosts();
+const storePosts = storePosts();
 const router = useRouter();
 
 const handleInput = () => {

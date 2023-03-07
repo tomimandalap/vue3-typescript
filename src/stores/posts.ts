@@ -13,7 +13,7 @@ function delay() {
   return new Promise<void>((res) => setTimeout(res, 1500));
 }
 
-export const usePosts = defineStore("posts", {
+export const storePosts = defineStore("posts", {
   state: (): PostsState => ({
     ids: [],
     all: new Map(),
