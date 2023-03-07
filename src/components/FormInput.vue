@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { stat } from "fs";
 import { Status } from "../utils/validations";
 
 interface Iinput {

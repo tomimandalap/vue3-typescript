@@ -2,17 +2,14 @@
 import { computed, ref } from "vue";
 import FormInput from "../components/FormInput.vue";
 import { validate, required, length } from "../utils/validations";
+import { NewUser, IMap } from "../utils/constants";
+import { storeUser } from "../stores/users";
+import { useModal } from "../composables/useModal";
 
-interface Iform {
-  username: string;
-  password: string;
-}
+const userStore = storeUser();
+const modal = useModal();
 
-interface IMap {
-  [key: string]: string;
-}
-
-const form = ref<Iform>({
+const form = ref<NewUser>({
   username: "",
   password: "",
 });
@@ -34,15 +31,18 @@ function handleUpdate(event: string, key: string) {
   inputValue[key] = event;
 }
 
-function handleSubmit() {
+async function handleSubmit() {
   if (isInvalid.value) return;
 
-  const newUser: Iform = {
+  const newUser: NewUser = {
     username: form.value.username,
     password: form.value.password,
   };
 
-  console.log(newUser);
+  try {
+    await userStore.createUser(newUser);
+  } catch (e) {}
+  modal.hideModal();
 }
 </script>
 
