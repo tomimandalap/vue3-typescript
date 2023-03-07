@@ -1,11 +1,17 @@
 <script setup lang="ts">
-import { RouterLink, useRoute } from "vue-router";
+import { RouterLink, useRoute, useRouter } from "vue-router";
 import { useModal } from "../composables/useModal";
 import { storeUser } from "../stores/users";
 
 const route = useRoute();
+const router = useRouter();
 const modal = useModal();
 const userStore = storeUser();
+
+const logout = async () => {
+  await userStore.logout();
+  router.push("/");
+};
 </script>
 <template>
   <div class="navbar">
@@ -17,9 +23,7 @@ const userStore = storeUser();
           class="button is-success"
           >New Post</RouterLink
         >
-        <button class="button is-danger" @click="userStore.logout()">
-          Log Out
-        </button>
+        <button class="button is-danger" @click="logout">Log Out</button>
       </div>
 
       <div v-else class="buttons">
