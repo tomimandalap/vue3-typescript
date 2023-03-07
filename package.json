@@ -4,14 +4,20 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "start": "npx ts-node src/server/index.ts",
     "dev": "vite --port 3000 --host",
     "build": "vue-tsc && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/cors": "2.8",
+    "@types/express": "4.17",
     "@types/luxon": "^2.3.1",
+    "cors": "2.8",
+    "express": "4.17",
     "luxon": "^3.2.1",
     "pinia": "^2.0.14",
+    "ts-node": "^10.9.1",
     "vue": "^3.2.45"
   },
   "devDependencies": {
