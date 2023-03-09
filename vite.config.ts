@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import { defineConfig, loadEnv } from "vite";
 import vue from "@vitejs/plugin-vue";
 
@@ -16,6 +17,9 @@ export default defineConfig(async ({ command, mode }) => {
         },
       },
       plugins: [vue()],
+      test: {
+        environment: "jsdom",
+      },
     };
   }
 });
