@@ -75,5 +75,15 @@ export const storePosts = defineStore("posts", {
         body,
       });
     },
+    updatePost(post: Post) {
+      const body = JSON.stringify(post);
+      return window.fetch("/api/post", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body,
+      });
+    },
   },
 });

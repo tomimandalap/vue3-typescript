@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted, watch, defineProps, defineEmits } from "vue";
 import { TimeLinePost, Post } from "../data/posts";
 import { marked } from "marked";
 import highlightjs from "highlight.js";
 import { debounce } from "lodash";
-import { storePosts } from "../stores/posts";
 import { useRouter } from "vue-router";
 import { storeUser } from "../stores/users";
 
@@ -12,11 +11,14 @@ const props = defineProps<{
   post: TimeLinePost | Post;
 }>();
 
+const emits = defineEmits<{
+  (event: "submit", post: Post): void;
+}>();
+
 const title = ref(props.post.title);
 const content = ref(props.post.markdown);
 const html = ref("");
 const contentEditable = ref<HTMLDivElement>();
-const postStore = storePosts();
 const router = useRouter();
 const userStore = storeUser();
 
@@ -43,8 +45,7 @@ const handleSave = async () => {
     authorId: userStore.userId,
   };
 
-  await postStore.createPost(newPost);
-  router.push("/");
+  emits("submit", newPost);
 };
 
 function parseHtml(markdown: string) {

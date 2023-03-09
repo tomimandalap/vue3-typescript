@@ -53,6 +53,19 @@ app.post<{}, {}, Post>("/post", (req, res) => {
   res.status(201).send(post);
 });
 
+app.put<{}, {}, Post>("/post", (req, res) => {
+  const index = allPosts.findIndex((post) => post.id === req.body.id);
+
+  if (index === -1) {
+    throw Error(`Post with id ${req.body.id} was not found`);
+  }
+
+  const existingPost = allPosts[index];
+  allPosts[index] = { ...existingPost, ...req.body };
+
+  res.status(201).send(allPosts[index]);
+});
+
 app.post<{}, {}, NewUser>("/sign-up", (req, res) => {
   const user: User = {
     ...req.body,
