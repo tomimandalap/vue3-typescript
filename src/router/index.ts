@@ -54,6 +54,7 @@ export const router = createRouter({
     },
     {
       path: "/:pathMatch(.*)*",
+      component: LayoutError,
       beforeEnter: (to, from, next) => {
         next("/404");
       },
@@ -74,6 +75,10 @@ router.beforeEach((to, from, next) => {
   }
 });
 
+type TITLE = "vue";
+let Maker: string = "@tomimandalap";
+
 router.afterEach((to) => {
-  document.title = `🚀 ${to.name} | @tomimandalap`;
+  let nameTitle = to.name as TITLE;
+  document.title = `🚀 ${nameTitle} - ${Maker}`;
 });
