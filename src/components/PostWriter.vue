@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue";
-import { TimeLinePost } from "../data/posts";
+import { TimeLinePost, Post } from "../data/posts";
 import { marked } from "marked";
 import highlightjs from "highlight.js";
 import { debounce } from "lodash";
 import { storePosts } from "../stores/posts";
 import { useRouter } from "vue-router";
+import { storeUser } from "../stores/users";
 
 const props = defineProps<{
-  post: TimeLinePost;
+  post: TimeLinePost | Post;
 }>();
 
 const title = ref(props.post.title);
@@ -17,6 +18,7 @@ const html = ref("");
 const contentEditable = ref<HTMLDivElement>();
 const postStore = storePosts();
 const router = useRouter();
+const userStore = storeUser();
 
 const handleInput = () => {
   if (!contentEditable.value) {
@@ -27,11 +29,18 @@ const handleInput = () => {
 };
 
 const handleSave = async () => {
-  const newPost: TimeLinePost = {
+  if (!userStore.userId) throw Error("User was not found");
+
+  const newPost: Post = {
     ...props.post,
+    created:
+      typeof props.post.created === "string"
+        ? props.post.created
+        : props.post.created.toISO(),
     title: title.value,
     markdown: content.value,
     html: html.value,
+    authorId: userStore.userId,
   };
 
   await postStore.createPost(newPost);

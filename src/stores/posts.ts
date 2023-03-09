@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
 import { defineStore } from "pinia";
-import { Post, today, thisWeek, thisMonth, TimeLinePost } from "../data/posts";
+import { Post, TimeLinePost } from "../data/posts";
 import { Period } from "../utils/constants";
 
 interface PostsState {
@@ -65,8 +65,8 @@ export const storePosts = defineStore("posts", {
       this.ids = ids;
       this.all = all;
     },
-    createPost(post: TimeLinePost) {
-      const body = JSON.stringify({ ...post, created: post.created.toISO() });
+    createPost(post: Post) {
+      const body = JSON.stringify(post);
       return window.fetch("/api/post", {
         method: "POST",
         headers: {
