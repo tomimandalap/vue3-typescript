@@ -14,7 +14,7 @@ if (!post) {
   throw Error(`Post with id ${id} was not found`);
 }
 
-async function handleNewPost(post: Post) {
+async function handleEditPost(post: Post) {
   await postsStore.updatePost(post);
   router.push("/");
 }
@@ -23,6 +23,6 @@ async function handleNewPost(post: Post) {
 <template>
   <div>
     Edit Post
-    <PostWriter :post="post" @submit="handleNewPost" />
+    <PostWriter :post="post" @submit="handleEditPost" />
   </div>
 </template>
