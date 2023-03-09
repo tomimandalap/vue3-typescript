@@ -3,6 +3,7 @@ import PostWriter from "../components/PostWriter.vue";
 import { useRoute } from "vue-router";
 import { storePosts } from "../stores/posts";
 import { useRouter } from "vue-router";
+import { Post } from "../data/posts";
 
 const route = useRoute();
 const postsStore = storePosts();
