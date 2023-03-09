@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import NewPost from "../views/NewPost.vue";
+import ShowPost from "../views/ShowPost.vue";
 import LayoutDefault from "../layouts/default.vue";
 import LayoutError from "../layouts/error.vue";
 import { storeUser } from "../stores/users";
@@ -22,6 +23,12 @@ export const router = createRouter({
           path: "posts/new",
           name: "Create Post",
           component: NewPost,
+          meta: { auth: true },
+        },
+        {
+          path: "posts/:id",
+          name: "Detail Post",
+          component: ShowPost,
           meta: { auth: true },
         },
       ],

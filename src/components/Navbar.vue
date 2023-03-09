@@ -18,7 +18,7 @@ const logout = async () => {
     <div class="navbar-end">
       <div v-if="userStore.userId" class="buttons">
         <RouterLink
-          v-show="route.fullPath !== '/posts/new'"
+          v-show="!route.fullPath.includes('/posts')"
           to="/posts/new"
           class="button is-success"
           >New Post</RouterLink
